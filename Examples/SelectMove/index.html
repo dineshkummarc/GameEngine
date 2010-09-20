@@ -6,25 +6,21 @@
 	<style type="text/css" media="screen">
 		body { overflow:hidden; font:10px/1.4 Helvetica,Arial,sans-serif; }
 		h1 { position:relative; z-index:1; text-align:center; }
-		.disc { -webkit-border-radius:10px; -moz-border-radius:10px; width:20px; height:20px; margin:-10px 0 0 -10px; }
+		.disc { -webkit-border-radius:10px; -moz-border-radius:10px; width:50px; height:50px; margin:-25px 0 0 -25px; background-color:red; }
+		.disc.selected { -webkit-box-shadow:0 0 5px rgba(255,0,0,.7); }
 	</style>
 	<script src="../mootools.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../Source/GameEngine.js" type="text/javascript" charset="utf-8"></script>
-	<script src="FollowMouse.js" type="text/javascript" charset="utf-8"></script>
+	<script src="SelectMove.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		window.addEvent('domready',function(){
 			var instance = new GameEngine({ autostart:true });
 
-			(100).times(function(){
-				new FollowMouse(instance,{
-					x:Number.random(-2000,2000),
-					y:Number.random(-2000,2000),
-					friction:Number.random(10,100),
-					r:Number.random(0,255),
-					g:Number.random(0,255),
-					b:Number.random(0,255),
-					a:Number.random(20,100)/100
-				})
+			(10).times(function(){
+				new SelectMove(instance,{
+					x:Number.random(50,600),
+					y:Number.random(50,600)
+				});
 			})
 
 			var toggleEngine = function(e){
