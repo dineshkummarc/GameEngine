@@ -1,3 +1,3 @@
-GameEngine - MooTools
+GameEngine
 =============
-A basic game engine, based on Fx/Events classes.
+A basic game engine, based on Mootools' Fx/Events classes.
