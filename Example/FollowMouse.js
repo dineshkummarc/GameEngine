@@ -3,15 +3,12 @@ var FollowMouse = new Class({
 	Implements:Options,
 	
 	options:{
+		className:'disc',
 		x:0,
 		y:0,  
 		mouseX:0,
 		mouseY:0,  
 		friction:16,
-		width:20,
-		height:20,
-		offsetX:-5,
-		offsetY:-5,
 		r:'255',
 		g:'0',
 		b:'0',
@@ -26,12 +23,9 @@ var FollowMouse = new Class({
 		this.setOptions(options);
 		
 		this.element = new Element('div',{
+			'class':this.options.className,
 			styles:{
 				background:'rgba('+this.options.r+','+this.options.g+','+this.options.b+','+this.options.a+')',
-				width:this.options.width,
-				height:this.options.height,
-				marginTop:this.options.offsetY,
-				marginLeft:this.options.offsetX,
 				top:this.options.y,
 				left:this.options.x,
 				position:'absolute'

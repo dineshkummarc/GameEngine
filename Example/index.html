@@ -6,6 +6,7 @@
 	<style type="text/css" media="screen">
 		body { overflow:hidden; font:10px/1.4 Helvetica,Arial,sans-serif; }
 		h1 { position:relative; z-index:1; text-align:center; }
+		.disc { -webkit-border-radius:10px; -moz-border-radius:10px; width:20px; height:20px; margin:-10px 0 0 -10px; }
 	</style>
 	<script src="mootools.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../Source/GameEngine.js" type="text/javascript" charset="utf-8"></script>
@@ -14,7 +15,7 @@
 		window.addEvent('domready',function(){
 			var instance = new GameEngine({ autostart:true });
 
-			(200).times(function(){
+			(100).times(function(){
 				new FollowMouse(instance,{
 					x:Number.random(-2000,2000),
 					y:Number.random(-2000,2000),

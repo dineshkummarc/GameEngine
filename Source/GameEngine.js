@@ -21,7 +21,7 @@ var GameEngine = new Class({
 			this[name] = this[name].bind(this);
 		},this);
 
-		// Add mouse events
+		// Create Mouse Events
 		this.options.mouseEvents.each(function(eventName){
 			this[eventName] = (function(event){
 				event.gameInstance = this;
@@ -29,7 +29,7 @@ var GameEngine = new Class({
 			}).bind(this);
 		},this);
 
-		// Add keyboard events
+		// Create Keyboard Events
 		this.options.keyboardEvents.each(function(eventName){
 			this[eventName] = (function(event){
 				event.gameInstance = this;
@@ -45,10 +45,12 @@ var GameEngine = new Class({
 		if(this.running) return;
 		this.running = true;
 
+		// Attach Mouse Events
 		this.options.mouseEvents.each(function(eventName){
 			this.options.container.addEvent(eventName,this[eventName]);
 		},this);
 
+		// Attach Keyboard Events
 		this.options.keyboardEvents.each(function(eventName){
 			window.addEvent(eventName,this[eventName]);
 		},this);
@@ -67,10 +69,12 @@ var GameEngine = new Class({
 	cancel:function(){
 		if(!this.running) return;
 
+		// Detach Mouse Events
 		this.options.mouseEvents.each(function(eventName){
 			this.options.container.removeEvent(eventName,this[eventName]);
 		},this);
 
+		// Detach Keyboard Events
 		this.options.keyboardEvents.each(function(eventName){
 			this.options.container.removeEvent(eventName,this[eventName]);
 		},this);
