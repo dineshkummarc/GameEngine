@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>index</title>
+	<style type="text/css" media="screen">
+		body { overflow:hidden; font:10px/1.4 Helvetica,Arial,sans-serif; }
+		h1 { position:relative; z-index:1; text-align:center; }
+	</style>
+	<script src="mootools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../Source/GameEngine.js" type="text/javascript" charset="utf-8"></script>
+	<script src="FollowMouse.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		window.addEvent('domready',function(){
+			var instance = new GameEngine({ autostart:true });
+
+			(200).times(function(){
+				new FollowMouse(instance,{
+					x:Number.random(-2000,2000),
+					y:Number.random(-2000,2000),
+					friction:Number.random(40,200),
+					r:Number.random(0,255),
+					g:Number.random(0,255),
+					b:Number.random(0,255),
+					a:Number.random(20,100)/100
+				})
+			})
+
+			var toggleEngine = function(e){
+				if(e.key!=='space') return;
+				(instance.running===true) ? instance.stop() : instance.start();
+			};
+
+			window.addEvent('keydown',toggleEngine);
+		})
+	</script>
+</head>
+<body>
+<h1>Press Spacebar to Start/Stop GameEngine</h1>
+</body>
+</html>
