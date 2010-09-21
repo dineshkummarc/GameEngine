@@ -1,83 +1,74 @@
 var GameEngine = new Class({
-	Extends:Fx,
+	Extends: Fx,
 
-	options:{
-		fps:60,
-		autostart:false,
-		container:window,
-		mouseEvents:['mousemove','mouseup','mousedown','click'],
-		keyboardEvents:['keydown','keyup','keypress']
+	options: {
+		fps: 60,
+		autostart: false,
+		container: window,
+		mouseEvents: ['mousemove','mouseup','mousedown','click'],
+		keyboardEvents: ['keydown','keyup','keypress']
 	},
 
-	running:false,
+	running: false,
 
-	initialize:function(options){
+	initialize: function(options){
 		this.setOptions(options);
 
-		if(typeOf(this.options.container)==='string') this.options.container = document.id(this.options.container);
-		if(!this.options.container) return;
+		if (typeOf(this.options.container)==='string') this.options.container = document.id(this.options.container);
+		if (!this.options.container) return;
 
 		['step','stop'].each(function(name){
 			this[name] = this[name].bind(this);
 		},this);
 
-		// Create Mouse Events
-		this.options.mouseEvents.each(function(eventName){
+		var fn = function(eventName){
 			this[eventName] = (function(event){
 				event.gameInstance = this;
 				this.fireEvent(eventName,event);
 			}).bind(this);
-		},this);
+		};
 
-		// Create Keyboard Events
-		this.options.keyboardEvents.each(function(eventName){
-			this[eventName] = (function(event){
-				event.gameInstance = this;
-				this.fireEvent(eventName,event);
-			}).bind(this);
-		},this);
+		// Create Events
+		this.options.mouseEvents.each(fn,this);
+		this.options.keyboardEvents.each(fn,this);
 
-		if(this.options.autostart)
-			this.start();
+		if (this.options.autostart) return this.start();
+		return this;
 	},
 
-	start:function(){
-		if(this.running) return;
+	start: function(){
+		if (this.running) return;
 		this.running = true;
 
-		// Attach Mouse Events
-		this.options.mouseEvents.each(function(eventName){
+		var fn = function(eventName){
 			this.options.container.addEvent(eventName,this[eventName]);
-		},this);
+		};
 
-		// Attach Keyboard Events
-		this.options.keyboardEvents.each(function(eventName){
-			window.addEvent(eventName,this[eventName]);
-		},this);
+		// Attach Events
+		this.options.mouseEvents.each(fn,this);
+		this.options.keyboardEvents.each(fn,this);
 
 		return this.parent();
 	},
 
-	step:function(){
+	step: function(){
 		return this.fireEvent('loop');
 	},
 
-	stop:function(){
+	stop: function(){
 		return this.cancel();
 	},
 
-	cancel:function(){
-		if(!this.running) return;
+	cancel: function(){
+		if (!this.running) return;
 
-		// Detach Mouse Events
-		this.options.mouseEvents.each(function(eventName){
+		var fn = function(eventName){
 			this.options.container.removeEvent(eventName,this[eventName]);
-		},this);
+		};
 
-		// Detach Keyboard Events
-		this.options.keyboardEvents.each(function(eventName){
-			this.options.container.removeEvent(eventName,this[eventName]);
-		},this);
+		// Detach Events
+		this.options.mouseEvents.each(fn,this);
+		this.options.keyboardEvents.each(fn,this);
 
 		this.running = false;
 
