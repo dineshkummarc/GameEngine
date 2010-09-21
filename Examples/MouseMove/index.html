@@ -13,23 +13,20 @@
 	<script src="FollowMouse.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		window.addEvent('domready',function(){
-			var instance = new GameEngine({ autostart:true });
+			var instance = new GameEngine({ autostart: true });
 
-			(100).times(function(){
+			(400).times(function(){
 				new FollowMouse(instance,{
-					x:Number.random(-2000,2000),
-					y:Number.random(-2000,2000),
-					friction:Number.random(10,100),
-					r:Number.random(0,255),
-					g:Number.random(0,255),
-					b:Number.random(0,255),
-					a:Number.random(20,100)/100
+					x: Number.random(-2000,2000),
+					y: Number.random(-2000,2000),
+					friction: Number.random(10,100),
+					color:'rgba('+Number.random(0,255)+','+Number.random(0,255)+','+Number.random(0,255)+','+Number.random(20,100)/100+')'
 				})
 			})
 
 			var toggleEngine = function(e){
-				if(e.key!=='space') return;
-				(instance.running===true) ? instance.stop() : instance.start();
+				if (e.key !== 'space') return;
+				(instance.running === true) ? instance.stop() : instance.start();
 			};
 
 			window.addEvent('keydown',toggleEngine);

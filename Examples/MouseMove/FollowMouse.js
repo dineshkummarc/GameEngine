@@ -1,34 +1,31 @@
 var FollowMouse = new Class({
 	
-	Implements:Options,
+	Implements: Options,
 	
-	options:{
-		className:'disc',
-		x:0,
-		y:0,  
-		mouseX:0,
-		mouseY:0,  
-		friction:16,
-		r:'255',
-		g:'0',
-		b:'0',
-		a:1
+	options: {
+		className: 'disc',
+		x: 0,
+		y: 0,  
+		mouseX: 0,
+		mouseY: 0,  
+		friction: 16,
+		color:'rgba(255,0,0,1)'
 	},
 	
 	initialize:function(gameEngine,options){
 		this.gameEngine = gameEngine;
 		
-		if(!this.gameEngine) return;
+		if (!this.gameEngine) return;
 		
 		this.setOptions(options);
 		
 		this.element = new Element('div',{
-			'class':this.options.className,
-			styles:{
-				background:'rgba('+this.options.r+','+this.options.g+','+this.options.b+','+this.options.a+')',
-				top:this.options.y,
-				left:this.options.x,
-				position:'absolute'
+			'class': this.options.className,
+			styles: {
+				background: this.options.color,
+				top: this.options.y,
+				left: this.options.x,
+				position: 'absolute'
 			}
 		}).inject(document.body);
 		
@@ -42,11 +39,11 @@ var FollowMouse = new Class({
 	},
 	
 	loop:function(){
-		this.options.x+=(this.options.mouseX-this.options.x)/this.options.friction;  
-		this.options.y+=(this.options.mouseY-this.options.y)/this.options.friction;
+		this.options.x += (this.options.mouseX - this.options.x) / this.options.friction;  
+		this.options.y += (this.options.mouseY - this.options.y) / this.options.friction;
 		this.element.setStyles({
-			top:this.options.y,
-			left:this.options.x
+			top: this.options.y,
+			left: this.options.x
 		});
 	}
 });

@@ -16,16 +16,17 @@
 		window.addEvent('domready',function(){
 			var instance = new GameEngine({ autostart:true });
 
-			(10).times(function(){
+			(20).times(function(){
 				new SelectMove(instance,{
-					x:Number.random(50,600),
-					y:Number.random(50,600)
+					x: Number.random(50,600),
+					y: Number.random(50,600),
+					color:'rgba('+Number.random(0,255)+','+Number.random(0,255)+','+Number.random(0,255)+','+Number.random(20,100)/100+')'
 				});
 			})
 
 			var toggleEngine = function(e){
-				if(e.key!=='space') return;
-				(instance.running===true) ? instance.stop() : instance.start();
+				if (e.key !== 'space') return;
+				(instance.running === true) ? instance.stop() : instance.start();
 			};
 
 			window.addEvent('keydown',toggleEngine);
